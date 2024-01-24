@@ -1,3 +1,17 @@
+*/codigo en octave*/
 x=0:0.01:2*pi;
 y=sin(x);
 plot(x,y)
+
+*/ codigo en python */
+import matplotlib.pyplot as plt
+import numpy as np 
+
+def h(x):
+    return np.sin(x)
+x=np.linspace(0,10,20)
+plt.plot(x,h(x))
+plt.xlabel('x')
+plt.ylabel('y')
+plt.title('Tarea 1')
+plt.show()

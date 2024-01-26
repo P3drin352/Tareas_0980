@@ -1,0 +1,33 @@
+%generar una onda senoidal
+fs = 1000; %frecuencia de muestro
+t = 0:1/fs:1; % vector de tiempo
+f = 100; % Frecuencia de la se?al
+x = sin(2*pi*f*t); %Se?al senoidal
+
+%Aplicar transformada de Fourier
+xf = fft(x);
+
+%Generar filtro pasa bajo
+n = length(x);
+fcutoff = 50; %frecuencia de corte
+h = ones(n,1); %Vector de ceros
+h(round(n*fcutoff/fs)+1:end) = 0; % amplicar filtro pasa-bajos
+
+%Aplicar filtro a las se?al en el dominio de la frecuencia
+xf_filtered = xf .* h;
+
+%Comvertir de la se?al filtrada a dominio del  tiempo
+x_filtered = ifft(xf_filtered);
+
+%Graficar se?al original y se?al filtrada
+figure;
+subplot(2,1,1);
+plot(t,x);
+title('Se?al Original');
+xlabel('Tiempo (s)');
+ylabel('Amplitud');
+subplot(2,1,2);
+plot(t, real(x_filtered));
+title('Se?al Filtrada');
+xlabel('Tiempo (s)');
+ylabel('Amplitud');
